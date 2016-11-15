@@ -1,0 +1,11 @@
+.hardware-server {
+    font-family: 'Black Ops One' !important;
+    font-weight: 400 !important;
+    text-transform: uppercase !important;
+}
+
+.software-server {
+    font-family: 'Lobster' !important;
+    font-weight: 400 !important;
+    text-transform: capitalize !important;
+}

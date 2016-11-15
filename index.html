@@ -4,13 +4,15 @@
 		<meta charset="utf-8">
 		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 
-		<title>reveal.js</title>
+		<title>Intro to Web Servers</title>
 
 		<link rel="stylesheet" href="css/reveal.css">
 		<link rel="stylesheet" href="css/theme/black.css">
 
 		<!-- Theme used for syntax highlighting of code -->
 		<link rel="stylesheet" href="lib/css/zenburn.css">
+		<link href="https://fonts.googleapis.com/css?family=Black+Ops+One|Lobster" rel="stylesheet">
+		<link rel="stylesheet" href="css/style.css" />
 
 		<!-- Printing and PDF exports -->
 		<script>
@@ -24,8 +26,343 @@
 	<body>
 		<div class="reveal">
 			<div class="slides">
-				<section>Slide 1</section>
-				<section>Slide 2</section>
+				<section>
+					<h1>Intro to Web Servers</h1>
+					<h2>by Chris Uehlinger</h2>
+					<p>Example Project:</p>
+					<pre><code>git clone https://github.com/chrisuehlinger/static-site-example.git</code></pre>
+
+					<aside class="notes" data-markdown>
+						<script type="text/template">
+							Right now I've got to say I'm really happy at the state of programming tutorials on the web.
+						</script>
+					</aside>
+				</section>
+				<section>
+					<div style="positon: relative; height: 700px; width: 960px;">
+						<img src="images/nodeschool.svg" style="position: absolute; background: yellow; max-width: 450px; top: 30px; left: 30px;"/>
+						<img src="images/udacity.png" style="position: absolute; background: white; max-width: 400px; top: 125px; right: 30px;"/>
+						<img src="images/codeschool.png" style="position: absolute; background: white; max-width: 450px; bottom: 245px; left: 45px;"/>
+						<img src="images/codecademy.png" style="position: absolute; background: white; max-width: 600px; bottom: 35px; right: 30px;"/>
+					</div>
+					<aside class="notes" data-markdown>
+						<script type="text/template">
+							There are tons of sites like nodeschool, Udacity, CodeSchool and Codecademy that make it really easy to learn the basics of HTML, CSS and JavaScript. However, when talking to people who are learning these topics, I often see a gap in many of the tutorials.
+						</script>
+					</aside>
+				</section>
+				<section>
+					<img src="images/codecademy-screenshot.png"/>
+					<aside class="notes" data-markdown>
+						<script type="text/template">
+							Many tutorials have you write JavaScript in a sort of abstract way. You might learn what a for loop is or how a function works, but you won't learn how to make those things happen on a web page. As such, I've met a lot of people who know the basics of JavaScript, but don't know how to put it to work.
+						</script>
+					</aside>
+				</section>
+				<section>
+					<h2>Task Runners</h2>
+					<div style="width: 960; display:flex; white-space:nowrap; justify-content: space-between; align-items: center;">
+						<img src="images/grunt-logo.png" style="max-width: 250px; background: white;">
+						<img src="images/gulp-logo.png" style="max-width: 250px;">
+						<img src="images/webpack-logo.gif" style="max-width: 250px;">
+					</div>
+					<aside class="notes" data-markdown>
+						<script type="text/template">
+							I've also met a lot of people who rely on Task Runners, but lack an understanding of some of the basic concepts underlying how a web server works
+						</script>
+					</aside>
+				</section>
+				<section>
+					<h2>Overview</h2>
+					<ul>
+						<li>What a Web Server is</li>
+						<li>How to start a server on your computer</li>
+						<li>A simple development workflow using a web server</li>
+					</ul>
+					<aside class="notes" data-markdown>
+						<script type="text/template">
+							* Prerequisites: Some familiarity with the command line.
+						</script>
+					</aside>
+				</section>
+				<section>
+					<h2>What is a server?</h2>
+					<div style="width: 960; display:flex; white-space:nowrap; justify-content: space-between; align-items: center;">
+						<div>
+							<h3 class="hardware-server">Server</h3>
+							<img src="images/hardware-server.jpg" style="max-width: 400px;">
+						</div>
+						<div>
+							<h3 class="software-server">Server</h3>
+							<img src="images/software-server.png" style="max-width: 400px;">
+						</div>
+					</div>
+					<aside class="notes" data-markdown>
+						<script type="text/template">
+							Web servers are the underlying technology that powers the whole internet, but many people don't fully understand how they work.
+						</script>
+					</aside>
+				</section>
+				<section>
+					<h2>A Static Web <span class="software-server">Server</span></h2>
+					<img src="images/server-start.png" style="max-width: 700px;"/>
+					<aside class="notes" data-markdown>
+						<script type="text/template">
+							Today we're going to talk about the simplest kind of web server, a static web server. A static web server is basically a program that sits in one of your folders, and waits for someone to ask for a file. When someone asks for a file, it sends it to them.
+						</script>
+					</aside>
+				</section>
+				<section>
+					<div style="positon: relative; height: 700px; width: 960px;">
+						<p>http://localhost:8080/index.html</p>
+						<img src="images/server-start.png" style="max-width: 600px; position: absolute; top: 100px; left: 0px;"/>
+						<img src="images/server-index-html.png" class="fragment fade-in" style="max-width: 600px; position: absolute; top: 100px; left: 0px;"/>
+						<div class="fragment fade-in" style="position: absolute; top: 300px; right: 0px;">
+							<pre>
+								<code>&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+    &lt;head&gt;
+        &lt;title&gt;My Web Page&lt;/title&gt;
+        &lt;link rel=&quot;stylesheet&quot; href=&quot;style.css&quot; /&gt;
+    &lt;/head&gt;
+    &lt;body&gt;
+        &lt;h1&gt;Hello World&lt;/h1&gt;
+        &lt;img src=&quot;images/house.jpg&quot; /&gt;
+    &lt;/body&gt;
+&lt;/html&gt;</code></pre>
+						</div>
+					</div>
+
+					<aside class="notes" data-markdown>
+						<script type="text/template">
+							Alright, so here's a URL we could use to ask our server to send us index.html. I'll explain the localhost:8080 part in a bit, but what's important to note is that we are telling our server to look in its folder for a file called index.html. When it finds that file, it sends the text of that file back to us.
+						</script>
+					</aside>
+				</section>
+				<section>
+					<div style="positon: relative; height: 700px; width: 960px;">
+						<p>http://localhost:8080/style.css</p>
+						<img src="images/server-start.png" style="max-width: 700px; position: absolute; top: 100px; left: 0px;"/>
+						<img src="images/server-style-css.png" class="fragment fade-in" style="max-width: 700px; position: absolute; top: 100px; left: 0px;"/>
+						<div class="fragment fade-in" style="position: absolute; top: 300px; right: 0px;">
+							<pre>
+								<code>body {
+    font-family: Helvetica, Arial, sans-serif;
+}
+
+h1 {
+    color: dodgerblue;
+}
+
+img {
+    width: 300px;
+}</code></pre>
+					</div>
+					<aside class="notes" data-markdown>
+						<script type="text/template">
+							The same can be said of style.css. If we ask for localhost/style.css, the server will look for that file and send it back to us.
+						</script>
+					</aside>
+				</section>
+				<section>
+					<div style="positon: relative; height: 700px; width: 960px;">
+						<p>http://localhost:8080/images/house.jpg</p>
+						<img src="images/server-start.png" style="max-width: 700px; position: absolute; top: 100px; left: 0px;"/>
+						<img src="images/server-images.png" class="fragment fade-in" style="max-width: 700px; position: absolute; top: 100px; left: 0px;"/>
+						<img src="images/server-images-house-jpg.png" class="fragment fade-in" style="max-width: 700px; position: absolute; top: 100px; left: 0px;"/>
+						<img src="images/house.jpg" class="fragment fade-in" style="max-width: 600px; position: absolute; top: 300px; right: 0px;"/>
+					</div>
+					<aside class="notes" data-markdown>
+						<script type="text/template">
+							Now let's ask for an image. Notice that this URL tells the server to go into the images folder, and find the file called house.jpg, and send that to us. So the thing to note here is that the server doesn't care what the type of the file is, it will send back any type of file you ask for, as long as it can find it in its folder.
+
+							Now I need to put a slight asterisk on that statement: Even static web servers care a little bit about the type of the file. They usually send back a little bit of info about the type of file they're returning, so that the browser knows what to do with it. And they can be configured to only serve certain types of files. However, at their most basic, a static web server is a really simple input-output machine. It takes in a URL, and sends back a file.
+						</script>
+					</aside>
+				</section>
+				<section>
+					<h2>URLs</h2>
+					<div>
+						<strong style="color:lime" class="fragment fade-in" data-fragment-index="1">http</strong>
+						<span class="fragment fade-in" data-fragment-index="2">://
+							<strong style="color:tomato">www.mysite.com</strong>
+							<span class="fragment fade-in" data-fragment-index="7">:<strong style="color: fuchsia;">80</strong></span>
+						</span>
+						<strong style="color:dodgerblue;" class="fragment fade-in" data-fragment-index="3">/path/to/index.html</strong>
+					</div>
+					<div class="fragment fade-in" data-fragment-index="4">
+						<strong style="color:lime">http</strong>
+						<span>://
+							<strong style="color:tomato">78.43.222.1</strong>
+							<span class="fragment fade-in" data-fragment-index="7">:<strong style="color: fuchsia;">80</strong></span>
+						</span>
+						<strong style="color:dodgerblue;">/path/to/index.html</strong>
+					</div>
+					<div class="fragment fade-in" data-fragment-index="5">
+						<strong style="color:lime">http</strong>
+						<span>://
+							<strong style="color:tomato">localhost</strong>
+							<span class="fragment fade-in" data-fragment-index="6">:<strong style="color: fuchsia;">8080</strong></span>
+						</span>
+						<strong style="color:dodgerblue;">/path/to/index.html</strong>
+					</div>
+					<ul>
+						<li class="fragment fade-in" data-fragment-index="1"><strong style="color:lime">Protocol</strong> - How we will talk to each other (for websites, always http or https)</li>
+						<li class="fragment fade-in" data-fragment-index="2"><strong style="color:tomato">Host</strong> - The name of the computer or <span class="hardware-server">server</span> we're talking to</li>
+						<li class="fragment fade-in" data-fragment-index="6"><strong style="color:fuchsia">Port</strong> - Which port on that computer are we talking to (80 by default)</li>
+						<li class="fragment fade-in" data-fragment-index="3"><strong style="color:dodgerblue;">Path</strong> - The name of the file we are looking for</li>
+					</ul>
+					<aside class="notes" data-markdown>
+						<script type="text/template">
+							Let's talk about these URLs real quick. Just to review, here's a basic URL, broken down into three parts.
+
+							- The protocol says how we're going to talk to each other, today we're just always going to use http, so this won't be too important.
+							- The host is the name of the computer we are talking to. As our request gets passed along through the internet, each computer tries to get it closer to the computer with this name.
+							- The path is the name of the file we are looking for.
+
+							I wanted to review this briefly, because the URLs we're using today look a little different from the ones you may be used to. For one thing, our hostname isn't a normal domain name, it's the word "localhost". The word "localhost" is a sort of "magic name" that always refers to the computer sending the request.
+
+							Also, these URLs have a port number. A computer can have many web servers running on it. In that case, each server will have to run on a different port. For this lesson, we're going to connect our servers to port 8080.
+						</script>
+					</aside>
+				</section>
+				<section>
+					<i>[animation of requests and responses going back and forth]</i>
+					<aside class="notes" data-markdown>
+						<script type="text/template">
+							One thing that I want to stress throughout all of this is that the conversation between the browser and the server is just text. There's nothing magical going on besides that. It's just text going back and forth, and most of it is human readable!
+						</script>
+					</aside>
+				</section>
+				<section>
+					<h2>Heavyweight Production <span class="software-server">Server</span>s</h2>
+					<div style="width: 960; display:flex; white-space:nowrap; justify-content: space-between; align-items: center;">
+						<img src="images/apache-logo.png" style="max-width: 300px;">
+						<img src="images/nginx-logo.png" style="max-width: 300px;">
+						<img src="images/iis-logo.png" style="max-width: 300px; background: white;">
+					</div>
+					<aside class="notes" data-markdown>
+						<script type="text/template">
+							So, how do we start a simple static web server? There are many web servers out there. There are heavyweight, production ready servers like Apache or Nginx which are good at quickly serving lots of files. However, for the purpose of this lesson I want to give you a few suggestions of simple servers that you can get up and running with quickly.
+						</script>
+					</aside>
+				</section>
+				<section>
+					<h2>Lightweight Development <span class="software-server">Server</span>s</h2>
+					
+					<p>If you're on a Mac:</p>
+					<pre><code class="bash">python -m SimpleHTTPServer 8000</code></pre>
+
+					<p>If you have Node.js installed:</p>
+					<pre><code class="bash">npm install -g http-server
+http-server -p 8000</code></pre>
+    
+					<p>Example Project:</p>
+					<pre><code>git clone https://github.com/chrisuehlinger/static-site-example.git</code></pre>
+					
+					<aside class="notes" data-markdown>
+						<script type="text/template">
+							I'd advise writing these down. So if you've just opened your shiny new MacBook and you open the Terminal program and you go to a folder and type `python -m SimpleHTTPServer 8000`, BOOM! You've got a server running on localhost:8000. Python comes installed be default on all Macs, so you won't need to install anything else. If you've downloaded and installed Node.js, you can install the `http-server` tool, which is a little bit less typing and has a couple extra options regarding caching, SSL and other stuff. This last one may be a bit advanced, but I wanted to include it because I find it so friggin useful. BrowserSync is a server that works just like we talked about here. However, you can tell it to watch a bunch of files, and if any of them change, your page will automatically refresh. It does this using some JS injection techniques that are way beyond the scope of this tutorial, but I just wanted to include it in case any of you find it useful.
+						</script>
+					</aside>
+				</section>
+				<section>
+					<h2>Demo</h2>
+					<i>Fire up a Terminal, go to the directory where we're keeping the site, type:
+    http-server -p (some number)</i>
+					<aside class="notes" data-markdown>
+						<script type="text/template">
+							So let's do this! I'm going to open up the Terminal app, now I'm going to tell it to go to the directory where my files are. I'll use the cd (or "change directory") command. Now I'll start up a server on port... someone tell me a number that's bigger than 1024? Cool, we'll start up a server on port (number).
+						</script>
+					</aside>
+				</section>
+				<section>
+					<i>Go into the browser, look at that page.</i>
+					<aside class="notes" data-markdown>
+						<script type="text/template">
+							So let's look at the server we just started. There's our page! If I open the Network tab of Chrome DevTools, I can look at all the requests the browser made to our server. For each request, I can see the URL we asked for, and also the response that we got back.
+						</script>
+					</aside>
+				</section>
+				<section>
+					<i>Edit the page, refresh the page</i>
+					<aside class="notes" data-markdown>
+						<script type="text/template">
+							Alright, let's edit this page. I'm going to save my changes. Now if I go back to the browser and refresh the page, you can see it looks different.
+						</script>
+					</aside>
+				</section>
+				<section>
+					<i>Go to the terminal, look at the IP address http-server gave us</i>
+					<aside class="notes" data-markdown>
+						<script type="text/template">
+							You may also notice that the http-server tool gave us an IP address that we can use on other computers to see our web site. This IP Address will only work on the local network, but if you're on the Betamore WiFi you can visit this address on your laptop, phone or tablet and see this web page.
+						</script>
+					</aside>
+				</section>
+				<section>
+					<h2>The Simple Static Workflow</h2>
+					<ol>
+						<li>Make a folder and some HTML, CSS and JS files</li>
+						<li>In the Terminal App (or cmd on Windows) go to that folder and set up a <span class="software-server">server</span></li>
+						<li>Look at your page in the browser at http://localhost:[port]/index.html</li>
+						<li>Change one of the files</li>
+						<li>Refresh the page</li>
+						<li>Go back to step 4, repeat until done</li>
+					</ol>
+					<aside class="notes" data-markdown>
+						<script type="text/template">
+							And that's it! This is the simple development workflow that I use all the time, both at work and when I'm building projects in my spare time.
+						</script>
+					</aside>
+				</section>
+				<section>
+					<h2>Some grease for this workflow</h2>
+					<ul>
+						<li>Set up "Autosave" or "Save on Loss of Focus" in your favorite editor</li>
+						<li>See if your editor has a "Compile on Save" plugin for Sass, LESS or other Preprocessors</li>
+						<li>Use BrowserSync as your server, it will automatically refresh the page when you save:</li>
+						<pre><code class="bash">npm install -g browser-sync
+browser-sync start --server -p 8000 --files="./**/*"</code></pre>
+					<aside class="notes" data-markdown>
+						<script type="text/template">
+							
+						</script>
+					</aside>
+				</section>
+				<section>
+					<h2>Demo with Three.js</h2>
+					<aside class="notes" data-markdown>
+						<script type="text/template">
+						</script>
+					</aside>
+				</section>
+				<section>
+					<h2>Deploying your web site</h2>
+					<ul>
+						<li>Awesome Free Host: GitHub Pages</li>
+						<li>Free-ish hosts: surge.sh and now-static</li>
+						<li>Free-ish Host-ish things: Amazon S3 and Dropbox Public Sites</li>
+						<li>Learn FTP and copy your files to a <span class="hardware-server">server</span></li>
+					</ul>
+					<aside class="notes" data-markdown>
+						<script type="text/template">
+						</script>
+					</aside>
+				</section>
+				<section>
+					<h2>Thanks for listening!</h2>
+					<ul>
+						<li>@Uehreka on Twitter and Slack</li>
+						<li>chrisuehlinger on GitHub</li>
+						<li>chrisuehlinger.com</li>
+					</ul>
+					<aside class="notes" data-markdown>
+						<script type="text/template">
+							
+						</script>
+					</aside>
+				</section>
 			</div>
 		</div>
 
@@ -42,7 +379,9 @@
 					{ src: 'plugin/markdown/marked.js' },
 					{ src: 'plugin/markdown/markdown.js' },
 					{ src: 'plugin/notes/notes.js', async: true },
-					{ src: 'plugin/highlight/highlight.js', async: true, callback: function() { hljs.initHighlightingOnLoad(); } }
+					{ src: 'plugin/highlight/highlight.js', async: true, callback: function() { hljs.initHighlightingOnLoad(); } },
+					{ src: 'socket.io/socket.io.js', async: true },
+					{ src: 'plugin/notes-server/client.js', async: true }
 				]
 			});
 		</script>
